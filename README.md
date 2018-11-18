@@ -1,4 +1,4 @@
-The Dockerfile is modified from https://github.com/shadowsocks/shadowsocks-libev/docker/alpine with no crypto patch added.
+The Dockerfile is modified from https://github.com/shadowsocks/shadowsocks-libev/docker/alpine with no crypto patch from https://github.com/SPYFF/shadowsocks-libev-nocrypto
 
 # Shadowsocks-libev Docker Image
 
