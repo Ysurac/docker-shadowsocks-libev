@@ -35,9 +35,8 @@ $ docker run -p 8388:8388 -p 8388:8388/udp -d --restart always ysurac/shadowsock
 ```
 This starts a container of the latest release with all the default settings, which is equivalent to
 ```bash
-$ ss-server -s 0.0.0.0 -p 8388 -k "$(hostname)" -m aes-256-gcm -t 300 --fast-open -d "8.8.8.8,8.8.4.4" -u
+$ ss-server -s 0.0.0.0 -p 8388 --key "base64key" -m aes-256-gcm -t 300 --fast-open -d "8.8.8.8,8.8.4.4" -u
 ```
-> **Note**: It's the hostname in the container that is used as the password, not that of the host.
 
 ### With custom port
 
@@ -48,18 +47,8 @@ Here's an example to start a container that listens on `28388` (both TCP and UDP
 $ docker run -p 28388:8388 -p 28388:8388/udp -d --restart always ysurac/shadowsocks-libev
 ```
 
-### With custom password
-
-Another thing you may want to change is the password. To change that, you can pass your own password as an environment variable when starting the container.
-
-Here's an example to start a container with `9MLSpPmNt` as the password:
-```bash
-$ docker run -e PASSWORD=9MLSpPmNt -p 8388:8388 -p 8388:8388/udp -d --restart always ysurac/shadowsocks-libev
-```
-> :warning: Click [here][6] to generate a strong password to protect your server.
-
 ### With other customizations
-Besides `PASSWORD`, the image also defines the following environment variables that you can customize:
+Besides `KEY`, the image also defines the following environment variables that you can customize:
 * `SERVER_ADDR`: the IP/domain to bind to, defaults to `0.0.0.0`
 * `SERVER_ADDR_IPV6`: the IPv6 address to bind to, defaults to `::0`
 * `METHOD`: encryption method to use, defaults to `aes-256-gcm`
@@ -85,7 +74,7 @@ shadowsocks:
     - "8388:8388"
   environment:
     - METHOD=aes-256-gcm
-    - PASSWORD=9MLSpPmNt
+    - KEY=base64key
   restart: always
 ```
 
@@ -110,7 +99,7 @@ Don't forget to share internet with your friends.
     "server_port": 8388,
     "local_address": "0.0.0.0",
     "local_port": 1080,
-    "password": "9MLSpPmNt",
+    "key": "base64key",
     "timeout": 600,
     "method": "aes-256-gcm"
 }

@@ -8,7 +8,7 @@ LABEL maintainer="Ycarus (Yannick Chabanois) <ycarus@zugaina.org>"
 ENV SERVER_ADDR 0.0.0.0
 ENV SERVER_ADDR_IPV6 ::0
 ENV SERVER_PORT 8388
-ENV PASSWORD=
+ENV KEY=
 ENV METHOD      aes-256-gcm
 ENV TIMEOUT     300
 ENV DNS_ADDRS    8.8.8.8,8.8.4.4
@@ -49,10 +49,9 @@ CMD exec ss-server \
       -s $SERVER_ADDR \
       -s $SERVER_ADDR_IPV6 \
       -p $SERVER_PORT \
-      -k ${PASSWORD:-$(hostname)} \
+      --key $KEY \
       -m $METHOD \
       -t $TIMEOUT \
-      --fast-open \
       -d $DNS_ADDRS \
       -u \
       $ARGS
